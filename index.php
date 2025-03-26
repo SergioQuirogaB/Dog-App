@@ -40,7 +40,11 @@ switch ($request) {
         header('Location: ' . $base_path);
         exit();
         break;
-        
+
+    case '/catalog':
+        require 'views/catalog.php';
+        break;
+            
     default:
         if (preg_match('/^\/accept-walk\/(\d+)$/', $request, $matches)) {
             $_GET['id'] = $matches[1];

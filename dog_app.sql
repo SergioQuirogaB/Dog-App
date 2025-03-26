@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-03-2025 a las 18:14:15
+-- Tiempo de generación: 26-03-2025 a las 01:41:18
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -34,14 +34,6 @@ CREATE TABLE `users` (
   `user_type` enum('owner','walker') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `users`
---
-
-INSERT INTO `users` (`id`, `username`, `password`, `user_type`) VALUES
-(1, 'sergio', '$2y$10$yN7u1XoA3VGqlIEBQy7LvuE65.0LuIDNtd3JW6V69cjiPc8G60lGG', 'owner'),
-(2, 'alejo', '$2y$10$4j1lkCgguOn/7ozED0mBzeOIFv8g67Ab.2livg0BlJoAOCUBLwfVa', 'walker');
-
 -- --------------------------------------------------------
 
 --
@@ -54,18 +46,10 @@ CREATE TABLE `walks` (
   `latitude` decimal(10,8) DEFAULT NULL,
   `longitude` decimal(11,8) DEFAULT NULL,
   `dog_details` text DEFAULT NULL,
-  `status` enum('pending','accepted') DEFAULT 'pending',
+  `status` enum('pending','accepted','completed') DEFAULT 'pending',
   `walker` varchar(50) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `walks`
---
-
-INSERT INTO `walks` (`id`, `owner`, `latitude`, `longitude`, `dog_details`, `status`, `walker`, `created_at`) VALUES
-(1, 'sergio', 23.00000000, 12.00000000, 'coquer', 'accepted', 'alejo', '2025-03-25 16:53:27'),
-(2, 'sergio', 4.67826474, -74.06845093, 'homero', 'accepted', 'alejo', '2025-03-25 16:57:06');
 
 --
 -- Índices para tablas volcadas
@@ -92,13 +76,13 @@ ALTER TABLE `walks`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `walks`
 --
 ALTER TABLE `walks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

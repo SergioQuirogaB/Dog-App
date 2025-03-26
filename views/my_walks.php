@@ -1,40 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Paseos</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <style>
         .map-container {
             height: 400px;
-            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
-<body>
-    <div class="container mt-5">
-        <h2>Mis Paseos Aceptados</h2>
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto mt-10 px-4">
+        <h2 class="text-3xl font-semibold text-center text-gray-800 mb-8">Mis Paseos Aceptados</h2>
         
         <?php foreach ($user_walks as $walk): ?>
             <?php if ($walk['status'] == 'accepted'): ?>
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Paseo #<?php echo $walk['id']; ?></h5>
-                        <?php if ($_SESSION['user_type'] == 'owner'): ?>
-                            <p>Paseador: <?php echo htmlspecialchars($walk['walker']); ?></p>
-                        <?php else: ?>
-                            <p>Dueño: <?php echo htmlspecialchars($walk['owner']); ?></p>
-                        <?php endif; ?>
-                        <div id="map-<?php echo $walk['id']; ?>" class="map-container"></div>
-                        <p>Detalles del perro: <?php echo htmlspecialchars($walk['dog_details']); ?></p>
-                        <p class="text-info">Simulación del paseo en curso...</p>
-                    </div>
+                <div class="bg-white shadow-lg rounded-lg mb-6 p-6">
+                    <h5 class="text-xl font-medium text-gray-700">Paseo #<?php echo $walk['id']; ?></h5>
+                    <?php if ($_SESSION['user_type'] == 'owner'): ?>
+                        <p class="text-gray-600 mt-2"><strong>Paseador:</strong> <?php echo htmlspecialchars($walk['walker']); ?></p>
+                    <?php else: ?>
+                        <p class="text-gray-600 mt-2"><strong>Dueño:</strong> <?php echo htmlspecialchars($walk['owner']); ?></p>
+                    <?php endif; ?>
+                    <div id="map-<?php echo $walk['id']; ?>" class="map-container mt-4"></div>
+                    <p class="text-gray-600 mt-4"><strong>Detalles del perro:</strong> <?php echo htmlspecialchars($walk['dog_details']); ?></p>
+                    <p class="text-info text-blue-500 mt-2 italic">Simulación del paseo en curso...</p>
                 </div>
             <?php endif; ?>
         <?php endforeach; ?>
 
         <?php if (!array_filter($user_walks, function($walk) { return $walk['status'] == 'accepted'; })): ?>
-            <div class="alert alert-info">
+            <div class="alert alert-info text-center text-gray-700 bg-blue-100 p-4 rounded-lg">
                 No tienes paseos aceptados en este momento.
             </div>
         <?php endif; ?>
@@ -44,9 +45,9 @@
     <script>
         const dogIcon = L.icon({
             iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
-            iconSize: [25, 41],
-            iconAnchor: [12, 41],
-            popupAnchor: [1, -34]
+            iconSize: [30, 45],  // Icono más grande para mejor visibilidad
+            iconAnchor: [15, 45],
+            popupAnchor: [1, -40]
         });
 
         const maps = {};
