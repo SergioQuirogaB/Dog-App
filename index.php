@@ -2,16 +2,21 @@
 session_start();
 require_once 'config/database.php';
 
-// Obtener la ruta actual
-$request_uri = $_SERVER['REQUEST_URI'];
-$base_path = '/App';
+// Get current request path
+$request_uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$base_path = dirname($_SERVER['SCRIPT_NAME']);
+if($base_path == '\\' || $base_path == '/') $base_path = '';
 $request = str_replace($base_path, '', $request_uri);
-$request = strtok($request, '?');
 
-// Enrutamiento
+// Remove trailing slashes
+$request = rtrim($request, '/');
+if (empty($request)) {
+    $request = '/';
+}
+
+// Routing
 switch ($request) {
-    case '/' :
-    case '':
+    case '/':
         require 'views/home.php';
         break;
         
@@ -37,7 +42,7 @@ switch ($request) {
         
     case '/logout':
         session_destroy();
-        header('Location: ' . $base_path);
+        header('Location: ' . $base_path . '/');
         exit();
         break;
 
