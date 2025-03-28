@@ -3,7 +3,7 @@ require_once 'models/Walk.php';
 
 if (!isset($_SESSION['username'])) {
     $_SESSION['flash'] = ['type' => 'error', 'message' => 'Debes iniciar sesión primero'];
-    header('Location: login');
+    header('Location: /App/login');  // Usa ruta absoluta
     exit();
 }
 

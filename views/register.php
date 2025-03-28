@@ -6,11 +6,34 @@
     <title>Registro</title>
     <!-- Vincular Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-white">
+    <!-- Incluir particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        /* Asegurarse que el fondo de particles.js cubra toda la pantalla */
+        #particles-js {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Esto asegura que los particles estén detrás del contenido */
+        }
 
-    <div class="flex items-center justify-center min-h-screen bg-gray-50">
-        <div class="w-full max-w-md p-8 bg-white rounded-xl shadow-lg bg-opacity-80">
+        /* El fondo del body y html será transparente */
+        html, body {
+            height: 100%; /* Asegura que el body y html ocupen toda la pantalla */
+            margin: 0;
+            background: transparent; /* Fondo transparente */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor de partículas -->
+    <div id="particles-js"></div>
+
+    <div class="flex items-center justify-center min-h-screen">
+        <div class="w-full max-w-md p-8 bg-white rounded-xl shadow-lg">
             <h2 class="text-3xl font-extrabold text-center text-blue-600 mb-6">Registro</h2>
 
             <!-- Mensaje Flash -->
@@ -49,6 +72,88 @@
             <p class="mt-4 text-center text-gray-600">¿Ya tienes cuenta? <a href="login" class="text-blue-600 hover:underline">Inicia sesión</a></p>
         </div>
     </div>
+
+    <!-- Inicializar particles.js -->
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#3b82f6"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#3b82f6"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#3b82f6",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 6,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
 
 </body>
 </html>

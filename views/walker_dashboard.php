@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Control - Paseador</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -112,12 +113,12 @@
                                         </p>
                                     </div>
                                     
-                                    <a 
-                                        href="accept-walk/<?php echo $walk['id']; ?>" 
-                                        class="w-full block text-center px-6 py-3 bg-primary-500 text-white font-semibold rounded-lg hover:bg-primary-600 transition-colors"
-                                    >
-                                        Aceptar Paseo
-                                    </a>
+                                    <a href="#" onclick="acceptWalk(<?php echo $walk['id']; ?>); return false;" 
+   class="w-full block text-center px-6 py-3 bg-primary-500 text-white font-semibold rounded-lg hover:bg-primary-600 transition-colors"
+>
+    Aceptar Paseo
+</a>
+
                                 </div>
                             <?php endif; ?>
                         <?php endforeach; ?>
@@ -126,5 +127,44 @@
             </div>
         </div>
     </div>
+    <script>
+function acceptWalk(walkId) {
+    fetch(`/accept-walk/${walkId}`, {
+        method: 'GET',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            Swal.fire({
+                icon: 'success',
+                title: '¡Paseo Aceptado!',
+                text: data.message,
+                confirmButtonText: 'Aceptar'
+            }).then(() => {
+                // Opcional: recargar la página o actualizar la lista de paseos
+                location.reload();
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: data.message,
+                confirmButtonText: 'Aceptar'
+            });
+        }
+    })
+    .catch(error => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Hubo un problema al aceptar el paseo',
+            confirmButtonText: 'Aceptar'
+        });
+    });
+}
+</script>
 </body>
 </html>

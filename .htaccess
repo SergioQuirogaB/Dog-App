@@ -1,17 +1,14 @@
 Options -MultiViews
 RewriteEngine On
 
-# Handle Authorization Header
-SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
-
-# Redirect to HTTPS if not already
-# RewriteCond %{HTTPS} !=on
-# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# Ruta específica para aceptar paseo
+RewriteRule ^accept-walk/([0-9]+)$ /App/controllers/accept_walk.php?id=$1 [L,QSA]
 
 # Redirect if not file or directory
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [L,QSA]
+
 
 # PHP settings
 <IfModule mod_php8.c>

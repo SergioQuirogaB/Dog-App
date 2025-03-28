@@ -7,14 +7,27 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Incluir Particles.js -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        body {
+            background-color: transparent !important;
+        }
+    </style>
 </head>
-<body class="bg-white">
+<body class="bg-transparent">
 
     <!-- Fondo de partículas (solo en JS) -->
-    <div id="particles-js" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
+    <div id="particles-js"></div>
 
-    <div class="flex items-center justify-center min-h-screen bg-white">
-        <div class="w-full max-w-md p-8 bg-white bg-opacity-80 rounded-xl shadow-lg">
+    <div class="flex items-center justify-center min-h-screen">
+        <div class="w-full max-w-md p-8 bg-white bg-opacity-90 rounded-xl shadow-lg relative z-10">
             <h2 class="text-3xl font-extrabold text-center text-sky-500 mb-6">Iniciar Sesión</h2>
             
             <!-- Mensaje Flash -->
@@ -46,48 +59,91 @@
 
     <!-- Configuración de Particles.js en JS -->
     <script>
-        particlesJS("particles-js", {
+        particlesJS('particles-js', {
             particles: {
                 number: {
-                    value: 100,  // Número de partículas
+                    value: 120, // Increased number of particles
                     density: {
                         enable: true,
-                        value_area: 800  // Área donde las partículas se distribuyen
-                    }
-                },
-                shape: {
-                    type: "circle",  // Las partículas serán círculos
-                    stroke: {
-                        width: 0,  // Sin borde para mayor visibilidad
+                        value_area: 800
                     }
                 },
                 color: {
-                    value: "#8A2BE2"  // Color morado para las partículas
+                    value: '#3b82f6' // Brighter blue
+                },
+                shape: {
+                    type: 'circle',
+                    stroke: {
+                        width: 0,
+                        color: '#3b82f6'
+                    }
+                },
+                opacity: {
+                    value: 0.7, // Increased opacity
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 1,
+                        opacity_min: 0.3,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 4, // Slightly larger particles
+                    random: true,
+                    anim: {
+                        enable: true,
+                        speed: 20,
+                        size_min: 0.5,
+                        sync: false
+                    }
                 },
                 line_linked: {
                     enable: true,
                     distance: 150,
-                    color: "#8A2BE2",  // Color morado para las líneas de conexión
-                    opacity: 0.4,
-                    width: 2
+                    color: '#3b82f6',
+                    opacity: 0.6, // Increased line opacity
+                    width: 1.5
                 },
                 move: {
-                    speed: 3  // Velocidad de movimiento de las partículas
+                    enable: true,
+                    speed: 4, // Slightly faster movement
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false,
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
                 }
             },
             interactivity: {
-                detect_on: "canvas",
+                detect_on: 'canvas',
                 events: {
                     onhover: {
                         enable: true,
-                        mode: "repulse"  // Efecto de repulsión al pasar el ratón sobre las partículas
+                        mode: 'repulse'
                     },
                     onclick: {
                         enable: true,
-                        mode: "push"  // Efecto de empuje al hacer clic en las partículas
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    repulse: {
+                        distance: 100,
+                        duration: 0.4
+                    },
+                    push: {
+                        particles_nb: 4
                     }
                 }
-            }
+            },
+            retina_detect: true
         });
     </script>
 
